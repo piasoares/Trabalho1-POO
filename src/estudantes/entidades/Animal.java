@@ -37,16 +37,21 @@ public class Animal {
      * Construtor do animal.
      * Todos os atributos são passados por parâmetro, exceto o tempo de espera
      * que sempre começa em 0.
-     * @param id
-     * @param nome
-     * @param especie
-     * @param andarDesejado
-     * @param peso
-     * @param temperaturaIdeal 
+     * @param id do Animal
+     * @param nome do Animal
+     * @param especie do Animal
+     * @param andarDesejado que o animal deseja ir
+     * @param peso do Animal
+     * @param temperaturaIdeal que o elevador deve ter
      */
     public Animal(int id, String nome, String especie, int andarDesejado, 
             int peso, int temperaturaIdeal){
-        /* TODO: codificar */
+        this.id = id;
+        this.nome = nome;
+        this. especie = especie;
+        this.andarDesejado = andarDesejado;
+        this.peso = peso;
+        this.temperaturaIdeal = temperaturaIdeal;
     }
     
     /**
@@ -66,7 +71,57 @@ public class Animal {
     public int getPeso(){
         return peso;
     }
+
     
+    /**
+     * Retorna a paciência máxima do animal.
+     * Gerado a partir do tipo do animal
+     * @return a paciência máxima do animal em segundos
+     */
+    public int getPACIENCIA_MAXIMA() {
+        return PACIENCIA_MAXIMA;
+    }
+
+    /**
+     * Retorna o nome do animal.
+     * @return uma string com o nome do animal.
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Retorna a espécie do animal.
+     * @return uma string com a espécie do animal.
+     */
+    public String getEspecie() {
+        return especie;
+    }
+
+    /**
+     * Retorna o andar desejado do animal, para desembarcar.
+     * @return o andar desejado pelo animal.
+     */
+    public int getAndarDesejado() {
+        return andarDesejado;
+    }
+
+    /**
+     * Retorna o tempo de espera do Animal.
+     * @return o tempo esperado pelo animal.
+     */
+    public int getTempoDeEspera() {
+        return tempoDeEspera;
+    }
+
+    /**
+     * Retorna a temperatura ideal para o Animal.
+     * @return a temperatura ideal para o animal.
+     */
+    public int getTemperaturaIdeal() {
+        return temperaturaIdeal;
+    }
+
     /**
      * Aumenta o tempo de espera um animal na fila quando passa um ciclo.
      * Esse é o tempo de espera na fila de um andar para embarcar no elevador.
@@ -82,5 +137,61 @@ public class Animal {
      */
     public void aumentaEspera(){
         
+    }
+
+    @Override
+    public String toString() {
+        return "Animal: [PACIENCIA_MAXIMA:" + PACIENCIA_MAXIMA + "]" + "\n[Id:" + id + "]" + "\n[Nome:" + nome + "]" +
+                "\n[Especie:" + especie + "]" + "\n[Peso:" + peso + "]" + "\n[Andar Desejado:" + andarDesejado + "]" +
+                "\n[Tempo de Espera:" + tempoDeEspera + "]" + "\n[Temperatura Ideal:" + temperaturaIdeal + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + PACIENCIA_MAXIMA;
+        result = prime * result + id;
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + ((especie == null) ? 0 : especie.hashCode());
+        result = prime * result + peso;
+        result = prime * result + andarDesejado;
+        result = prime * result + tempoDeEspera;
+        result = prime * result + temperaturaIdeal;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Animal other = (Animal) obj;
+        if (PACIENCIA_MAXIMA != other.PACIENCIA_MAXIMA)
+            return false;
+        if (id != other.id)
+            return false;
+        if (nome == null) {
+            if (other.nome != null)
+                return false;
+        } else if (!nome.equals(other.nome))
+            return false;
+        if (especie == null) {
+            if (other.especie != null)
+                return false;
+        } else if (!especie.equals(other.especie))
+            return false;
+        if (peso != other.peso)
+            return false;
+        if (andarDesejado != other.andarDesejado)
+            return false;
+        if (tempoDeEspera != other.tempoDeEspera)
+            return false;
+        if (temperaturaIdeal != other.temperaturaIdeal)
+            return false;
+        return true;
     }
 }

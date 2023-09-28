@@ -171,7 +171,7 @@ public class Elevador {
      * O ar-condicionado funciona entre 0 e 40 graus Celsius. Se a tentativa
      * de mudança está dentro da faixa de funcionamento, ele altera o valor
      * e retorna um indicador de sucesso. Se a tentativa está fora da faixa
-     * de funcionamento, ela nãotem efeito e retorna um indicador de fracasso.
+     * de funcionamento, ela não tem efeito e retorna um indicador de fracasso.
      * @param novaTemperatura em graus Celsius entre 0 graus e 40 graus
      * @return true se conseguiu modificar a temperatura; false caso contrário
      */

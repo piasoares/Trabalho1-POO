@@ -1,0 +1,7 @@
+{
+    "docify.commentService.docstringFormat": "JavaDoc",
+    "docify.commentService.autoTranslationService": "Portuguese",
+    "docify.commentService.programmingLanguage": "java",
+    "docify.translateService.targetLanguage": "Portuguese",
+    "commentTranslate.source": "Google"
+}
