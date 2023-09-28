@@ -19,13 +19,14 @@ public class Ave extends Animal {
     /**
      * Construtor da Ave.
      * Todos os atributos são passados por parâmetro (utilizando o super()), exceto a paciência 
-     * máxima que, em anfibio é sempre 30.
+     * máxima que, em aves é sempre 30.
      * @param id da Ave
      * @param nome da Ave
      * @param especie da Ave
      * @param andarDesejado que a ave deseja ir
      * @param peso da Ave
      * @param temperaturaIdeal que o elevador deve ter
+     * @param corDasPenas da Ave
      */
     public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal, String corDasPenas) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal);
