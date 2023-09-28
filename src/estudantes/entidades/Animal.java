@@ -52,6 +52,7 @@ public class Animal {
         this.andarDesejado = andarDesejado;
         this.peso = peso;
         this.temperaturaIdeal = temperaturaIdeal;
+        tempoDeEspera = 0;
     }
     
     /**
@@ -139,9 +140,9 @@ public class Animal {
         
     }
 
-    @Override
+    @Override // devo colocar paciencia maxima aqui?
     public String toString() {
-        return "Animal: [PACIENCIA_MAXIMA:" + PACIENCIA_MAXIMA + "]" + "\n[Id:" + id + "]" + "\n[Nome:" + nome + "]" +
+        return "Animal: [Id:" + id + "]" + "\n[Nome:" + nome + "]" +
                 "\n[Especie:" + especie + "]" + "\n[Peso:" + peso + "]" + "\n[Andar Desejado:" + andarDesejado + "]" +
                 "\n[Tempo de Espera:" + tempoDeEspera + "]" + "\n[Temperatura Ideal:" + temperaturaIdeal + "]";
     }
