@@ -14,11 +14,11 @@ public class Mamifero extends Animal {
     /**
      * Construtor do Mamífero.
      * Todos os atributos são passados por parâmetro (utilizando o super()).
-     * @param id do Animal
-     * @param nome do Animal
-     * @param especie do Animal
-     * @param andarDesejado que o animal deseja ir
-     * @param peso do Animal
+     * @param id do Mamífero
+     * @param nome do Mamífero
+     * @param especie do Mamífero
+     * @param andarDesejado que o Mamífero deseja ir
+     * @param peso do Mamífero
      * @param temperaturaIdeal que o elevador deve ter
      * @param peludo se o mamifero é peludo ou não.
      */

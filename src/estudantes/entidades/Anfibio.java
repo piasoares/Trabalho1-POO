@@ -10,7 +10,7 @@ package estudantes.entidades;
 public class Anfibio extends Animal {
     
     /**
-     * Limite da paciência de um animal esperando na fila antes de ir embora.
+     * Limite da paciência de um anfíbio esperando na fila antes de ir embora.
      */
     public int PACIENCIA_MAXIMA = 45; //em segundos (ciclos de espera)
 
@@ -18,11 +18,11 @@ public class Anfibio extends Animal {
      * Construtor do Anfibio.
      * Todos os atributos são passados por parâmetro (utilizando o super()), exceto a paciência 
      * máxima que, em anfibio é sempre 45.
-     * @param id do Animal
-     * @param nome do Animal
-     * @param especie do Animal
-     * @param andarDesejado que o animal deseja ir
-     * @param peso do Animal
+     * @param id do Anfíbio
+     * @param nome do Anfíbio
+     * @param especie do Anfíbio
+     * @param andarDesejado que o Anfíbio deseja ir
+     * @param peso do Anfíbio
      * @param temperaturaIdeal que o elevador deve ter
      */
     public Anfibio(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal) {

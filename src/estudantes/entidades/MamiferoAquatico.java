@@ -1,9 +1,16 @@
 package estudantes.entidades;
 
+/**
+ * Classe que define os animais mamíferos aquáticos. É uma subclasse de Mamifero.
+ * @see Mamifero
+ * 
+ * @author Pietra Soares pietrasoares.aluno@unipampa.edu.br
+ * @version 1.1
+ */
 public class MamiferoAquatico  extends Mamifero{
     
     /**
-     * Limite da paciência de um animal esperando na fila antes de ir embora.
+     * Limite da paciência de um mamífero esperando na fila antes de ir embora.
      */
     public int PACIENCIA_MAXIMA = 40; //em segundos (ciclos de espera)
 
@@ -11,11 +18,11 @@ public class MamiferoAquatico  extends Mamifero{
      * Construtor do Anfibio.
      * Todos os atributos são passados por parâmetro (utilizando o super()), exceto a paciência 
      * máxima que, em mamífero aquático é sempre 40.
-     * @param id do Animal
-     * @param nome do Animal
-     * @param especie do Animal
-     * @param andarDesejado que o animal deseja ir
-     * @param peso do Animal
+     * @param id do mamífero aquático
+     * @param nome do mamífero aquático
+     * @param especie do mamífero aquático
+     * @param andarDesejado que o mamífero aquático deseja ir
+     * @param peso do mamífero aquático
      * @param temperaturaIdeal que o elevador deve ter
      * @param peludo se o mamifero é peludo ou não.
      */
