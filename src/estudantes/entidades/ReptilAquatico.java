@@ -28,10 +28,12 @@ public class ReptilAquatico extends Reptil {
     public String andar(){
         return "Nadando";
     }
+
     @Override
     public String toString() {
         return super.toString() + "[Paciência Máxima:" + PACIENCIA_MAXIMA + "]";
     }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
