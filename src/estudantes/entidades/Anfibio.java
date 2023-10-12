@@ -12,7 +12,7 @@ public class Anfibio extends Animal {
     /**
      * Limite da paciência de um anfíbio esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 45; //em segundos (ciclos de espera)
+    public final int PACIENCIA_MAXIMA = 45; //em segundos (ciclos de espera)
 
     /**
      * Construtor do Anfibio.
@@ -27,7 +27,6 @@ public class Anfibio extends Animal {
      */
     public Anfibio(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal);
-        PACIENCIA_MAXIMA = 45;
     }
 
     /**

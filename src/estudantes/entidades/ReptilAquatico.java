@@ -4,7 +4,7 @@ public class ReptilAquatico extends Reptil {
     /**
      *Limite da paciência que um reptil aquatico fica esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 15;
+    public final int PACIENCIA_MAXIMA = 15;
 
     /**
      * Construtor de ReptilAquatico.

@@ -10,7 +10,7 @@ public class MamiferoTerrestre extends Mamifero{
     /**
      *Limite da paciência de um mamífero terrestre fica esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 35;
+    public final int PACIENCIA_MAXIMA = 35;
 
     /**
      * Construtor de Mamifero Terrestre.
@@ -27,7 +27,6 @@ public class MamiferoTerrestre extends Mamifero{
     public MamiferoTerrestre(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal,
             boolean peludo) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal, peludo);
-        PACIENCIA_MAXIMA = 35;
     }
     /**
      * Retorna que o mamifero terrestre está andando

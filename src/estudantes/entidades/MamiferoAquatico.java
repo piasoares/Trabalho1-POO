@@ -12,7 +12,7 @@ public class MamiferoAquatico  extends Mamifero{
     /**
      * Limite da paciência de um mamífero esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 40; //em segundos (ciclos de espera)
+    public final int PACIENCIA_MAXIMA = 40; //em segundos (ciclos de espera)
 
     /**
      * Construtor do Anfibio.
@@ -29,7 +29,6 @@ public class MamiferoAquatico  extends Mamifero{
     public MamiferoAquatico(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal,
             boolean peludo) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal, peludo);
-        PACIENCIA_MAXIMA = 40;
     }
 
     /**

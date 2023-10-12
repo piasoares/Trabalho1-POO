@@ -9,7 +9,7 @@ public class Peixe extends Animal {
     /**
      *Limite da paciência que um peixe fica esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 60;
+    public final int PACIENCIA_MAXIMA = 60;
     /**
      *Atributo cor das escamas
      */
@@ -27,7 +27,6 @@ public class Peixe extends Animal {
      */
     public Peixe(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal, String corDasEscamas) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal);
-        PACIENCIA_MAXIMA = 60;
         this.corDasEscamas = corDasEscamas;
     }
     /**

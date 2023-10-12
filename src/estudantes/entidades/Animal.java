@@ -151,7 +151,24 @@ public class Animal {
      * @see professor.entidades.Arca#simularVida
      */
     public void aumentaEspera() {
+        // cada ciclo leva 1 seg
+        // ver quanto tempo nos ciclos o elevador levou
+        // depois compara com a paciência do animal
+        // variavel local pros segundos
+        // como que vamos locar os segundos(ciclos) nela
+        // coloca um get.paciencia animal tal
+        // compara eles
 
+        // o número de animais que saiu da fila
+        // se o animal continua na fila pra entrar no elevador
+        // onde implementar. Ascensorista??
+
+        // cada vez vez que o método agir do Ascensorista for chamado aumenta numa
+        // variavel o tempo de espera
+        // variavel da classa ancesorista, fazer get, mudamos ancesorista no agir
+        // criar um vetor pros animais na fila (já n existe)
+        // como limpar de usada?
+        // tempo que os animais ficaram esperando
     }
 
     @Override // devo colocar paciencia maxima aqui?

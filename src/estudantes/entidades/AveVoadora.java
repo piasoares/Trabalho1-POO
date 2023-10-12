@@ -5,7 +5,7 @@ public class AveVoadora extends Ave{
     /**
      * Limite da paciência de uma Ave esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 20; //em segundos (ciclos de espera)
+    public final int PACIENCIA_MAXIMA = 20; //em segundos (ciclos de espera)
 
 
     /**
@@ -23,7 +23,6 @@ public class AveVoadora extends Ave{
     public AveVoadora(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal,
             String corDasPenas) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal, corDasPenas);
-        PACIENCIA_MAXIMA = 20;
     }
 
 

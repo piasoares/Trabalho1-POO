@@ -12,7 +12,7 @@ public class Ave extends Animal {
     /**
      * Limite da paciência de uma Ave esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 30; //em segundos (ciclos de espera)
+    public final int PACIENCIA_MAXIMA = 30; //em segundos (ciclos de espera)
     private String corDasPenas;
 
 
@@ -30,7 +30,6 @@ public class Ave extends Animal {
      */
     public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal, String corDasPenas) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal);
-        PACIENCIA_MAXIMA = 30;
         this.corDasPenas = corDasPenas;
     }
 

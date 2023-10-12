@@ -11,7 +11,7 @@ public class Reptil extends Animal {
     /**
      * Limite da paciência que um reptil fica esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 10;
+    public final int PACIENCIA_MAXIMA = 10;
 
     /**
      * Construtor de Reptil.

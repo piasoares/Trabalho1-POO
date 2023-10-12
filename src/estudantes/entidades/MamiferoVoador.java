@@ -9,7 +9,7 @@ public class MamiferoVoador extends Mamifero{
     /**
      *Limite da paciência de um mamífero voador fica esperando na fila antes de ir embora.
      */
-    public int PACIENCIA_MAXIMA = 15; //em segundos (ciclos de espera)
+    public final int PACIENCIA_MAXIMA = 15; //em segundos (ciclos de espera)
 
     /**
      * Construtor de Mamifero Voador.
@@ -26,7 +26,6 @@ public class MamiferoVoador extends Mamifero{
     public MamiferoVoador(int id, String nome, String especie, int andarDesejado, int peso, int temperaturaIdeal,
             boolean peludo) {
         super(id, nome, especie, andarDesejado, peso, temperaturaIdeal, peludo);
-        PACIENCIA_MAXIMA = 15;
     }
     /**
      * Retorna que o mamifero esta voando
