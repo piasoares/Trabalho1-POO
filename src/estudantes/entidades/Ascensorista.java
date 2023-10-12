@@ -17,8 +17,6 @@ import professor.entidades.Elevador;
  */
 public class Ascensorista {
 
-    // variavel pro aumenta espera começa com zero
-
     /**
      * Construtor padrão de Ascensorista.
      * Esse construtor sem parâmetros que será usado pela Arca. Embora a
@@ -57,6 +55,14 @@ public class Ascensorista {
          * verifica animais na fila (temperatura, peso, andar(se ta subindo e se ta
          * descendo))
          * colocar os animais para dentro
+         */
+
+        /**
+         * pra chamar a lista de animais: List<Animal> animaisNaFila =
+         * Animal.getAnimaisNaFila();
+         * para aumentar a espera: for (Animal animal : animaisNaFila) {
+         * animal.aumentaEspera();
+         * }
          */
     }
 

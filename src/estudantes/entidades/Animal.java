@@ -1,5 +1,8 @@
 package estudantes.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Classe que define um animal da arca.
  * <br>
@@ -26,13 +29,17 @@ public class Animal {
      * Limite da paciência de um animal esperando na fila antes de ir embora.
      */
     public final int PACIENCIA_MAXIMA = 25; // em segundos (ciclos de espera)
+    /**
+     * Lista estática criada para armazenar os animais na fila, esperando pelo elevador.
+     */
+    private static List<Animal> animaisNaFila = new ArrayList<>(); 
 
     private int id;
     private String nome;
     private String especie;
     private int peso; // em quilos
     private int andarDesejado; // 0 é o térreo
-    private int tempoDeEspera;
+    private int tempoDeEspera; // em segundos
     private int temperaturaIdeal; // em graus Celsius
 
     /**
@@ -55,7 +62,8 @@ public class Animal {
         this.andarDesejado = andarDesejado;
         this.peso = peso;
         this.temperaturaIdeal = temperaturaIdeal;
-        tempoDeEspera = 0;
+        tempoDeEspera = 0; // Sempre que um animal é criado, seu tempo de espera vira "0" 
+        animaisNaFila.add(this); // Adiciona o animal à lista de animais na fila
     }
 
     /**
@@ -126,11 +134,17 @@ public class Animal {
 
     /**
      * Retorna a temperatura ideal para o Animal.
-     * 
      * @return a temperatura ideal para o animal.
      */
     public int getTemperaturaIdeal() {
         return temperaturaIdeal;
+    }
+
+    /**
+     * @return uma lista com os animais na fila.
+     */
+    public static List<Animal> getAnimaisNaFila() {
+        return animaisNaFila;
     }
 
     /**
@@ -151,31 +165,25 @@ public class Animal {
      * @see professor.entidades.Arca#simularVida
      */
     public void aumentaEspera() {
-        // cada ciclo leva 1 seg
-        // ver quanto tempo nos ciclos o elevador levou
-        // depois compara com a paciência do animal
-        // variavel local pros segundos
-        // como que vamos locar os segundos(ciclos) nela
-        // coloca um get.paciencia animal tal
-        // compara eles
+        tempoDeEspera++; // Aumenta o tempo de espera (para a lista de animais)...
+        int pacienciaMaxima = getPACIENCIA_MAXIMA(); // pega a paciência máxima deles...
 
-        // o número de animais que saiu da fila
-        // se o animal continua na fila pra entrar no elevador
-        // onde implementar. Ascensorista??
+        if (tempoDeEspera > pacienciaMaxima) { // Se a paciência ultrapassar o tempo...
+            removerDaFila(this); // o animal se retira da fila.
+        }
 
-        // cada vez vez que o método agir do Ascensorista for chamado aumenta numa
-        // variavel o tempo de espera
-        // variavel da classa ancesorista, fazer get, mudamos ancesorista no agir
-        // criar um vetor pros animais na fila (já n existe)
-        // como limpar de usada?
-        // tempo que os animais ficaram esperando
     }
 
-    @Override // devo colocar paciencia maxima aqui?
+    public void removerDaFila(Animal animal) {
+        animaisNaFila.remove(animal);
+    }
+
+    @Override
     public String toString() {
         return "Animal: [Id:" + id + "]" + "\n[Nome:" + nome + "]" +
                 "\n[Especie:" + especie + "]" + "\n[Peso:" + peso + "]" + "\n[Andar Desejado:" + andarDesejado + "]" +
-                "\n[Tempo de Espera:" + tempoDeEspera + "]" + "\n[Temperatura Ideal:" + temperaturaIdeal + "]";
+                "\n[Tempo de Espera:" + tempoDeEspera + "]" + "\n[Temperatura Ideal:" + temperaturaIdeal + "]"
+                + "[Paciência Máxima:" + PACIENCIA_MAXIMA + "]";
     }
 
     @Override
