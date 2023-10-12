@@ -30,9 +30,10 @@ public class Animal {
      */
     public final int PACIENCIA_MAXIMA = 25; // em segundos (ciclos de espera)
     /**
-     * Lista estática criada para armazenar os animais na fila, esperando pelo elevador.
+     * Lista estática criada para armazenar os animais na fila, esperando pelo
+     * elevador.
      */
-    private static List<Animal> animaisNaFila = new ArrayList<>(); 
+    private static List<Animal> animaisNaFila = new ArrayList<>();
 
     private int id;
     private String nome;
@@ -62,7 +63,7 @@ public class Animal {
         this.andarDesejado = andarDesejado;
         this.peso = peso;
         this.temperaturaIdeal = temperaturaIdeal;
-        tempoDeEspera = 0; // Sempre que um animal é criado, seu tempo de espera vira "0" 
+        tempoDeEspera = 0; // Sempre que um animal é criado, seu tempo de espera vira "0"
         animaisNaFila.add(this); // Adiciona o animal à lista de animais na fila
     }
 
@@ -134,6 +135,7 @@ public class Animal {
 
     /**
      * Retorna a temperatura ideal para o Animal.
+     * 
      * @return a temperatura ideal para o animal.
      */
     public int getTemperaturaIdeal() {
@@ -174,6 +176,12 @@ public class Animal {
 
     }
 
+    /**
+     * Criado para remover os animais da fila. Seja por: desistência ou entrada no
+     * elevador.
+     * 
+     * @param animal
+     */
     public void removerDaFila(Animal animal) {
         animaisNaFila.remove(animal);
     }
