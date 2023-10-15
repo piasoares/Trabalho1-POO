@@ -151,7 +151,7 @@ public class Arca {
 
         // TODO do professor
 
-        // chamar ascensorista
+        // chama ascensorista
         ascensorista.agir(elevador, andares[elevador.getAndar()]);
 
         // TODO do professor

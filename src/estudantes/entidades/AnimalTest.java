@@ -8,12 +8,12 @@ import static org.junit.Assert.*;
 public class AnimalTest {
 
     @Test
-    public void testAumentaEspera() {
+    public void testAumentaEspera() { // 
         // Crie um andar (substitua com a lógica real de criação do Andar)
         Andar andar = new Andar(0); // Certifique-se de criar o Andar apropriadamente
 
         // Crie um animal
-        Animal animal = new Animal(1, "Cachorro", "Canis lupus familiaris", 0, 10, 25);
+        Animal animal = new Anfibio(1, "Cachorro", "Canis lupus familiaris", 0, 10, 25);
 
         // Adicione o animal à fila do elevador no andar (substitua com a lógica real)
         andar.colocarNaFila(animal);

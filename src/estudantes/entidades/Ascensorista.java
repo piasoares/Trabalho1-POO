@@ -44,21 +44,85 @@ public class Ascensorista {
      * @param andar    o andar no qual o elevador está parado
      */
     public void agir(Elevador elevador, Andar andar) {
-        /* TODO: codificar */
+        System.out.println("Início do método agir");
+        while (andar.consultarTamanhoDaFila() > 0) { // Verifica se tem animais na fila do andar
+            Animal animal = andar.chamarProximoDaFila(); // Pega o próximo animal na fila do andar
+            String tipoAnimal = animal.getClass().getSimpleName(); // Verifica o tipo do animal
 
-        /**
-         * verifica animais na fila (temperatura, peso, andar(se ta subindo e se ta
-         * descendo))
-         * colocar os animais para dentro, método existente em Andar
-         */
+            boolean encherDeAgua = (tipoAnimal.equals("Anfibio") || tipoAnimal.equals("MamiferoAquatico") ||
+                    tipoAnimal.equals("Peixe") || tipoAnimal.equals("ReptilAquatico"));
 
-         /**
-          * public void agir() {
-                for (Animal animal : filaParaElevador) {
-                    animal.aumentaEspera();
+            boolean naoEncherDeAgua = (tipoAnimal.equals("Anfibio") || tipoAnimal.equals("Ave") ||
+                    tipoAnimal.equals("AveVoadora") || tipoAnimal.equals("MamiferoTerrestre") ||
+                    tipoAnimal.equals("MamiferoVoador") || tipoAnimal.equals("Reptil"));
+
+            for (Animal outroAnimal : andar.checarFilaParaElevador()) {
+                // Verifica se há outros animais na fila com características semelhantes
+                if (outroAnimal != animal &&
+                        outroAnimal.getAndarDesejado() == animal.getAndarDesejado() &&
+                        outroAnimal.getTemperaturaIdeal() == animal.getTemperaturaIdeal() &&
+                        elevador.isCheioDeAgua() == encherDeAgua) {
+                    animal = outroAnimal; // Se sim, atualiza a referência do animal para um com características
+                                          // semelhantes
                 }
             }
-          */
-    }
 
+            if (encherDeAgua && !elevador.isCheioDeAgua()) {
+                elevador.encher(); // Enche o elevador de água se necessário
+                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
+                                                                                       // elevador
+            } else if (naoEncherDeAgua && elevador.isCheioDeAgua()) {
+                elevador.drenar(); // Drena a água do elevador se necessário
+                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
+                                                                                       // elevador
+            } else {
+                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
+                                                                                       // elevador
+            }
+
+            int pesoTotal = 0;
+            int animaisEmbarcados = 0;
+            elevador.embarcar(animal); // Embarca o animal no elevador
+            pesoTotal += animal.getPeso(); // Atualiza o peso total com o peso do animal
+            animaisEmbarcados++;
+
+            for (int i = 0; i < andar.checarFilaParaElevador().length; i++) {
+                if (andar.checarFilaParaElevador()[i] != animal) {
+                    int novoPeso = pesoTotal + andar.checarFilaParaElevador()[i].getPeso();
+                    if (novoPeso <= elevador.LIMITE_DE_PESO) {
+                        elevador.embarcar(andar.checarFilaParaElevador()[i]); // Embarca outros animais se não
+                                                                              // ultrapassar o peso máximo
+                        pesoTotal = novoPeso;
+                        animaisEmbarcados++;
+                    }
+                }
+                if (pesoTotal > elevador.LIMITE_DE_PESO) {
+                    break;
+                }
+            }
+
+            for (int i = 0; i < animaisEmbarcados; i++) {
+                if (elevador.getAndar() > 0) {
+                    elevador.descer(); // Move os animais para baixo para desembarcar.
+                }                
+            }
+
+            // Adicione o aumento de espera para todos os animais na fila após o embarque.
+            // Obtém a fila de animais no andar
+            Animal[] fila = andar.checarFilaParaElevador();
+
+            // Itera por todos os animais na fila e aplica o aumento de espera
+            for (Animal animalNaFila : fila) {
+                animalNaFila.aumentaEspera(andar);
+            }
+
+            andar.desembarcar(animal); // Remove o animal do andar
+
+            for (int i = 0; i < andar.checarFilaParaElevador().length; i++) {
+                andar.desembarcar(andar.checarFilaParaElevador()[i]); // Remove outros animais que embarcaram junto
+            }
+        }
+
+        System.out.println("Fim do método agir");
+    }
 }
