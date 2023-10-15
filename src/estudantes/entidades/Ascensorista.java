@@ -45,25 +45,20 @@ public class Ascensorista {
      */
     public void agir(Elevador elevador, Andar andar) {
         /* TODO: codificar */
-        // Os métodos subir e descer só podem ser usados uma vez na execução desse
-        // método
-        // ou subir ou descer um de cada vez que o método for chamado
-
-        /*
-         * A gente precisa fazer o método agir() do Ascensorista:
-         * já está no simularVida()?
-         * verifica animais na fila (temperatura, peso, andar(se ta subindo e se ta
-         * descendo))
-         * colocar os animais para dentro
-         */
 
         /**
-         * pra chamar a lista de animais: List<Animal> animaisNaFila =
-         * Animal.getAnimaisNaFila();
-         * para aumentar a espera: for (Animal animal : animaisNaFila) {
-         * animal.aumentaEspera();
-         * }
+         * verifica animais na fila (temperatura, peso, andar(se ta subindo e se ta
+         * descendo))
+         * colocar os animais para dentro, método existente em Andar
          */
+
+         /**
+          * public void agir() {
+                for (Animal animal : filaParaElevador) {
+                    animal.aumentaEspera();
+                }
+            }
+          */
     }
 
 }

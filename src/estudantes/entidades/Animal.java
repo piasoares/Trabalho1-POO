@@ -3,6 +3,8 @@ package estudantes.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import professor.entidades.Andar;
+
 /**
  * Classe que define um animal da arca.
  * <br>
@@ -30,10 +32,9 @@ public class Animal {
      */
     public final int PACIENCIA_MAXIMA = 25; // em segundos (ciclos de espera)
     /**
-     * Lista estática criada para armazenar os animais na fila, esperando pelo
-     * elevador.
+     * Lista de animais que saíram da fila por terem a paciência ultrapassada.
      */
-    private static List<Animal> animaisNaFila = new ArrayList<>();
+    private static List<Animal> animaisQueSairamDaFila = new ArrayList<>();
 
     private int id;
     private String nome;
@@ -64,7 +65,6 @@ public class Animal {
         this.peso = peso;
         this.temperaturaIdeal = temperaturaIdeal;
         tempoDeEspera = 0; // Sempre que um animal é criado, seu tempo de espera vira "0"
-        animaisNaFila.add(this); // Adiciona o animal à lista de animais na fila
     }
 
     /**
@@ -142,11 +142,8 @@ public class Animal {
         return temperaturaIdeal;
     }
 
-    /**
-     * @return uma lista com os animais na fila.
-     */
-    public static List<Animal> getAnimaisNaFila() {
-        return animaisNaFila;
+    public static List<Animal> getAnimaisQueSairamDaFila() {
+        return animaisQueSairamDaFila;
     }
 
     /**
@@ -166,24 +163,31 @@ public class Animal {
      *                          paciência
      * @see professor.entidades.Arca#simularVida
      */
-    public void aumentaEspera() {
+    public void aumentaEspera(Andar andar) {
         tempoDeEspera++; // Aumenta o tempo de espera (para a lista de animais)...
-        int pacienciaMaxima = getPACIENCIA_MAXIMA(); // pega a paciência máxima deles...
 
-        if (tempoDeEspera > pacienciaMaxima) { // Se a paciência ultrapassar o tempo...
-            removerDaFila(this); // o animal se retira da fila.
+        if (tempoDeEspera > PACIENCIA_MAXIMA) { // Verifica se o tempo ultrapassou a paciência, se sim,...
+            // Acessa a lista de animais da fila da classe Andar, pelo método "checarFilaParaElevador".
+            Animal[] fila = andar.checarFilaParaElevador();
+            int posicao = -1;
+
+            // Procura o animal na fila para determinar a posição.
+            for (int i = 0; i < fila.length; i++) {
+                if (fila[i] == this) {
+                    posicao = i;
+                    break;
+                }
+            }
+
+            // Verifica se o animal foi encontrado na fila, se sim,...
+            if (posicao >= 0) {
+                andar.tirarDaFila(posicao); // remove o animal da fila usando a posição...
+                animaisQueSairamDaFila.add(this); // e adiciona o animal à lista de animais que saíram da fila.
+            }
+
+            // Por fim, solta a exceção.
+            throw new RuntimeException("O animal está esperando mais tempo do que sua paciência permite");
         }
-
-    }
-
-    /**
-     * Criado para remover os animais da fila. Seja por: desistência ou entrada no
-     * elevador.
-     * 
-     * @param animal
-     */
-    public void removerDaFila(Animal animal) {
-        animaisNaFila.remove(animal);
     }
 
     @Override
