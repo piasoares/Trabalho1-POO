@@ -1,7 +1,8 @@
 package professor.entidades;
 
-import estudantes.entidades.Animal;
 import java.util.HashSet;
+
+import estudantes.entidades.Animal;
 
 /**
  * Classe que representa o elevador com suas características.

@@ -165,7 +165,7 @@ public class Animal {
      */
     public void aumentaEspera(Andar andar) {
         tempoDeEspera++; // Aumenta o tempo de espera ...
-    
+
         if (tempoDeEspera > PACIENCIA_MAXIMA) { // Verifica se o tempo ultrapassou a paciência, se sim,...
             // Acessa a lista de animais da fila da classe Andar, pelo método "checarFilaParaElevador".
             Animal[] fila = andar.checarFilaParaElevador();

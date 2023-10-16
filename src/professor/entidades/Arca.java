@@ -4,7 +4,7 @@ import java.util.Random;
 
 import estudantes.entidades.Anfibio;
 import estudantes.entidades.Animal;
-import estudantes.entidades.Ascensorista;
+import estudantes.entidades.AscensoristaTeste;
 import estudantes.entidades.Ave;
 import estudantes.entidades.AveVoadora;
 import estudantes.entidades.MamiferoAquatico;
@@ -44,7 +44,7 @@ public class Arca {
     private int tempo = 0;
     private Elevador elevador;
     private Andar[] andares;
-    private Ascensorista ascensorista;
+    private AscensoristaTeste ascensorista;
     public static final int QUANTIDADE_DE_ANDARES_NA_ARCA = 5;
 
     /**
@@ -59,7 +59,7 @@ public class Arca {
         for (int i = 0; i < QUANTIDADE_DE_ANDARES_NA_ARCA; i++) {
             andares[i] = new Andar(i);
         }
-        ascensorista = new Ascensorista();
+        ascensorista = new AscensoristaTeste();
     }
 
     /**
