@@ -1,8 +1,10 @@
 package professor.entidades;
 
-import estudantes.entidades.Animal;
+
 import java.util.HashSet;
 import java.util.LinkedList;
+
+import estudantes.entidades.Animal;
 
 /**
  * Classe que representa um andar da arca onde animais embarcam e desembarcam.
@@ -13,9 +15,10 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class Andar {
-    private int andar; //começa no 0
-    private LinkedList<Animal> filaParaElevador;
-    private HashSet<Animal> animaisQueDesceram;
+    
+    public int andar; //começa no 0
+    public LinkedList<Animal> filaParaElevador;
+    public HashSet<Animal> animaisQueDesceram;
     
     /**
      * Construtor do andar.
@@ -137,5 +140,8 @@ public class Andar {
      */
     public Animal[] checarDesembarcados(){
         return animaisQueDesceram.toArray(Animal[]::new);
+    }
+
+    public void devolverAnimalParaFila(Animal proximoAnimal) {
     }
 }

@@ -25,8 +25,8 @@ public class ReptilAquatico extends Reptil {
      * Retorna que o reptil aquatico está nadando
      * @return String "Nadando"
      */
-    public String andar(){
-        return "Nadando";
+    public String nadar(){
+        return "nadando";
     }
 
     @Override

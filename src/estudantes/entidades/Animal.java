@@ -163,25 +163,13 @@ public class Animal {
      *                          paciência
      * @see professor.entidades.Arca#simularVida
      */
-    public void aumentaEspera(Andar andar) {
-        tempoDeEspera++; // Aumenta o tempo de espera ...
+    public void aumentaEspera() {
+        
 
-        if (tempoDeEspera > PACIENCIA_MAXIMA) { // Verifica se o tempo ultrapassou a paciência, se sim,...
-            // Acessa a lista de animais da fila da classe Andar, pelo método "checarFilaParaElevador".
-            Animal[] fila = andar.checarFilaParaElevador();
-    
-            for (int i = 0; i < fila.length; i++) {
-                // Aumenta o tempo de espera para todos os animais na fila.
-                fila[i].tempoDeEspera++;
-    
-                if (fila[i].tempoDeEspera > PACIENCIA_MAXIMA) {
-                    andar.tirarDaFila(i); // remove o animal da fila usando a posição...
-                    animaisQueSairamDaFila.add(fila[i]); // e adiciona o animal à lista de animais que saíram da fila.
-                }
-            }
+        
             // Por fim, solta a exceção.
             throw new RuntimeException("O animal está esperando mais tempo do que sua paciência permite");
-        }
+        
     }
 
     @Override

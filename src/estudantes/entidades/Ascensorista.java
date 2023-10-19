@@ -13,7 +13,9 @@ import professor.entidades.Elevador;
  * método público deve ser "agir".
  * 
  * @author Jean Cheiran
- * @version 1.0
+ * @author Pietra
+ * @author Patricia
+ * @version 1.3
  */
 public class Ascensorista {
 
@@ -24,7 +26,6 @@ public class Ascensorista {
      * ser alterado conforme a necessidade.
      */
     public Ascensorista() {
-        /* TODO: codificar */
     }
 
     /**
@@ -44,116 +45,235 @@ public class Ascensorista {
      * @param andar    o andar no qual o elevador está parado
      */
     public void agir(Elevador elevador, Andar andar) {
-        System.out.println("Início do método agir");
-        while (andar.consultarTamanhoDaFila() > 0) { // Verifica se tem animais na fila do andar
-            Animal animal = andar.chamarProximoDaFila(); // Pega o próximo animal na fila do andar
-            String tipoAnimal = animal.getClass().getSimpleName(); // Verifica o tipo do animal
+        System.out.println("Inicio do metodo agir");
+        int pesoTotal = 0;
+        int andarDesejado = 0;
+        int andarAtual = elevador.getAndar();
+        int temperaturaDoArCondicionado = 0;
 
-            boolean encherDeAgua = (tipoAnimal.equals("Anfibio") || tipoAnimal.equals("MamiferoAquatico") ||
-                    tipoAnimal.equals("Peixe") || tipoAnimal.equals("ReptilAquatico"));
-
-            boolean naoEncherDeAgua = (tipoAnimal.equals("Anfibio") || tipoAnimal.equals("Ave") ||
-                    tipoAnimal.equals("AveVoadora") || tipoAnimal.equals("MamiferoTerrestre") ||
-                    tipoAnimal.equals("MamiferoVoador") || tipoAnimal.equals("Reptil"));
-
-            for (Animal outroAnimal : andar.checarFilaParaElevador()) {
-                // Verifica se há outros animais na fila com características semelhantes
-                if (outroAnimal != animal &&
-                        outroAnimal.getAndarDesejado() == animal.getAndarDesejado() &&
-                        outroAnimal.getTemperaturaIdeal() == animal.getTemperaturaIdeal() &&
-                        elevador.isCheioDeAgua() == encherDeAgua) {
-                    animal = outroAnimal; // Se sim, atualiza a referência do animal para um com características
-                                          // semelhantes
-                }
+        if(elevador.checarAnimaisNoElevador().length > 0){
+            andarDesejado = elevador.checarAnimaisNoElevador()[0].getAndarDesejado();
+            if (andarDesejado > andarAtual) {
+                elevador.subir();
+                elevador.movimentar();
+                andarAtual = elevador.getAndar(); // Atualize o andarAtual
+                System.out.println("Elevador subindo para o andar " + andarAtual);
+    
+            } else if (andarDesejado < andarAtual) {
+                elevador.descer();
+                elevador.movimentar();
+                andarAtual = elevador.getAndar(); // Atualize o andarAtual
+                System.out.println("Elevador descendo...");
+    
+            } else if (andarDesejado == andarAtual) {
+                System.out.println("Elevador continua no mesmo andar.");
+                andar.desembarcar(andar.chamarProximoDaFila()); // Pra garantir
+                System.out.println("animaisQueDesceram "+andar.animaisQueDesceram.size());
+                elevador.desembarcar(elevador.checarAnimaisNoElevador()[0], andar);
+                pesoTotal = 0;
+                movimentaFila(elevador, andar, pesoTotal);
+                System.out.println("Peso total após desembarque: " + pesoTotal);
+                System.out.println("Animal desembarcado no andar desejado. Andar:" + andarDesejado);
+    
             }
-
-            if (encherDeAgua && !elevador.isCheioDeAgua()) {
-                elevador.encher(); // Enche o elevador de água se necessário
-                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
-                                                                                       // elevador
-            } else if (naoEncherDeAgua && elevador.isCheioDeAgua()) {
-                elevador.drenar(); // Drena a água do elevador se necessário
-                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
-                                                                                       // elevador
-            } else {
-                elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Define a temperatura do
-                                                                                       // elevador
-            }
-
-            int pesoTotal = 0;
-            int animaisEmbarcados = 0;
-            elevador.embarcar(animal); // Embarca o animal no elevador
-            pesoTotal += animal.getPeso(); // Atualiza o peso total com o peso do animal
-            animaisEmbarcados++;
-
-            for (int i = 0; i < andar.checarFilaParaElevador().length; i++) {
-                if (andar.checarFilaParaElevador()[i] != animal) {
-                    int novoPeso = pesoTotal + andar.checarFilaParaElevador()[i].getPeso();
-                    if (novoPeso <= elevador.LIMITE_DE_PESO) {
-                        elevador.embarcar(andar.checarFilaParaElevador()[i]); // Embarca outros animais se não
-                                                                              // ultrapassar o peso máximo
-                        pesoTotal = novoPeso;
-                        animaisEmbarcados++;
-                    }
-                }
-                // if (pesoTotal > elevador.LIMITE_DE_PESO) {
-                //     break;
-                // }
-            }
-
-            //VERIFICA O ANDAR DESEJADO DOS ANIMAIS QUE ESTAO DENTRO DO ELEVADOR
-            //VERIFICA O ANDAR EM QUE O ELEVADOR ESTÁ PARADO
-            //SE O ANDAR DESEJADO DOS ANIMAIS FOR MAIOR QUE O ANDAR QUE O ELEVADOR ESTA PARADO O ELEVADOR DEVE SUBIR ATE O ANDAR DE DESTINO
-            //SE O ANDAR DESEJADO DOS ANIMAIS FOR MENOR QUE O ANDAR QUE O ELEVADOR ESTA PARADO O ELEVADOR DEVE DESCER ATE O ANDAR DE DESTINO
-            //DESEMBARCAR OS ANIMAIS NO ANDAR DE DESTINO
-            //VERIFICAR A FILA E FAZER TODO PROCESSO NOVAMENTE
-            //ESSE PROXIMO FOR QUE MOVE OS ANIMAIS PARA DESEMBARCAR NAO SEI SE É NECESSARIO
-
-            // for (int i = 0; i < animaisEmbarcados; i++) {
-            //     if (elevador.getAndar() > 0) {
-            //         elevador.descer(); // Move os animais para baixo para desembarcar.
-            //     }
-            // }
-
-            // Adicione o aumento de espera para todos os animais na fila após o embarque.
-            // Obtém a fila de animais no andar
-            Animal[] fila = andar.checarFilaParaElevador();
-
-            // Itera por todos os animais na fila e aplica o aumento de espera
-            //for (Animal animalNaFila : fila) {
-            //    animalNaFila.aumentaEspera(andar);
-            //}
-            System.out.println("andar desejado "+animal.getAndarDesejado());
-            System.out.println("andar  "+andar.getAndar());
-            System.out.println("elevador  "+elevador.getAndar());
-            System.out.println("peso no andar "+pesoTotal);
-            System.out.println("tipo animal "+animal.getClass().getSimpleName());
-            System.out.println("alagado "+elevador.isCheioDeAgua());
-            System.out.println("temperatura "+elevador.getTemperaturaDoArCondicionado());
-            if(elevador.getAndar() == animal.getAndarDesejado()){
-                System.out.println("desembarcou  ");
-                andar.desembarcar(animal); // Remove o animal do andar
-                for (int i = 0; i < andar.checarFilaParaElevador().length; i++) {
-                    andar.desembarcar(andar.checarFilaParaElevador()[i]); // Remove outros animais que embarcaram junto
-                }
-                break;
-            }else{
-                // if(elevador.getAndar() <= animal.getAndarDesejado()){
-                if(elevador.getAndar() <= andar.getAndar()){
-                    System.out.println("subiu  ");
-                    elevador.subir();
-                    System.out.println("novo andar "+elevador.getAndar());
-                    break;
-                }else{
-                    System.out.println("desceu  ");
-                    elevador.descer();
-                    System.out.println("novo andar "+elevador.getAndar());
-                    break;
+        }else{
+            movimentaFila(elevador, andar, pesoTotal);
+            
+            if(elevador.checarAnimaisNoElevador().length > 0){
+                andarDesejado = elevador.checarAnimaisNoElevador()[0].getAndarDesejado();
+                if (andarDesejado == andarAtual) {
+                    System.out.println("Elevador continua no mesmo andar.");
+                    andar.desembarcar(andar.chamarProximoDaFila()); // Pra garantir
+                    System.out.println("animaisQueDesceram "+andar.animaisQueDesceram.size());
+                    elevador.desembarcar(elevador.checarAnimaisNoElevador()[0], andar);
+                    pesoTotal = 0;
+                    movimentaFila(elevador, andar, pesoTotal);
+                    System.out.println("Peso total após desembarque: " + pesoTotal);
+                    System.out.println("Animal desembarcado no andar desejado. Andar:" + andarDesejado);
+        
                 }
             }
             
         }
+       
+    /*
+     * // Verificar se o elevador está no térreo (andar 0)
+     * if (elevador.getAndar() == 0) {
+     * elevador.subir();
+     * } else if (andar.consultarTamanhoDaFila() == 0) {
+     * irParaTerreo(elevador);
+     * }
+     */
 
-        System.out.println("Fim do método agir");
+    System.out.println("Fim do método agir");
     }
+
+    public  void movimentaFila(Elevador elevador, Andar andar, int pesoTotal){
+        
+        // Verificar se o elevador está subindo ou descendo
+        // Verificar se há animais na fila do andar
+        if (andar.consultarTamanhoDaFila() > 0) {
+            System.out.println("Tamanho da fila " + andar.consultarTamanhoDaFila());
+            // Obter o primeiro animal da fila
+            Animal animal = andar.chamarProximoDaFila();
+
+            // Verificar as características do primeiro animal da fila
+            String tipoAnimal = animal.getClass().getSimpleName();
+
+            // Preparar o elevador para o animal
+            boolean encherDeAgua = (tipoAnimal.equals("Anfibio") || tipoAnimal.equals("MamiferoAquatico") ||
+                    tipoAnimal.equals("Peixe") || tipoAnimal.equals("ReptilAquatico"));
+
+            if (encherDeAgua == elevador.cheioDeAgua) {// ???
+                if (encherDeAgua && !elevador.isCheioDeAgua()) {
+                    elevador.encher(); // Encher o elevador de água se necessário
+                    System.out.println("O elevador está alagado");
+                    elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Definir a temperatura do
+                    // elevador
+                } else if (!encherDeAgua && elevador.isCheioDeAgua()) {
+                    elevador.drenar(); // Drenar a água do elevador se necessário
+                    System.out.println("O elevador foi drenado e está sem água");
+                    elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Definir a temperatura do
+                    // elevador
+                } else {
+                    elevador.setTemperaturaDoArCondicionado(animal.getTemperaturaIdeal()); // Definir a temperatura do
+                    // elevador
+                }
+            }
+
+            // Embarcar o animal no elevador
+            if (temperaturaIdeal(animal.getTemperaturaIdeal(), elevador.getTemperaturaDoArCondicionado())) {
+                elevador.embarcar(animal);
+                pesoTotal += animal.getPeso(); // Atualiza o peso total
+                andar.tirarDaFila(animal);
+                elevador.remover(animal);
+                System.out.println("Animal embarcado no elevador ");
+                System.out.println("O peso atual no elevador é de :" + pesoTotal);
+            } else {
+                System.out.println("Animal náo pode embarcar por causa da temperatura ideal.");
+            }
+        
+        // Verificar se há outros animais na fila para embarcar
+        while (andar.consultarTamanhoDaFila() > 0) {
+            Animal proximoAnimal = andar.chamarProximoDaFila();
+            if (podemEmbarcarJuntos(animal, proximoAnimal, elevador)) {
+                // Verificar o peso limite antes de embarcar o próximo animal
+                if (temperaturaIdeal(animal.getTemperaturaIdeal(), elevador.getTemperaturaDoArCondicionado())) {
+                    int novoPesoTotal = pesoTotal + proximoAnimal.getPeso(); // Calcula o novo peso total
+                    if (novoPesoTotal <= elevador.LIMITE_DE_PESO) {
+                        // Embarcar o próximo animal
+                        elevador.embarcar(proximoAnimal);
+                        andar.tirarDaFila(proximoAnimal);
+                        elevador.remover(proximoAnimal);
+                        pesoTotal = novoPesoTotal; // Atualiza o peso total com o novo valor
+                        System.out.println("Animal embarcado no elevador");
+                        System.out.println("Peso atual no elevador:" + pesoTotal);
+                    }
+                } else {
+                    andar.devolverAnimalParaFila(proximoAnimal);
+                    System.out.println("Peso limite do elevador excedido. Não é possível embarcar o próximo animal.");
+                }
+            } else {
+                andar.devolverAnimalParaFila(proximoAnimal);
+                System.out.println("Animais não podem embarcar juntos. Eles têm características diferentes.");
+                break; // Você pode optar por interromper o loop quando os animais não podem embarcar
+                       // juntos
+            }
+        }
+
+    
+        // Desembarcar o animal no andar desejado
+        // andar.desembarcar(animal);
+        // elevador.desembarcar(animal, andar);
+        // Reiniciar a contagem do peso total
+        // pesoTotal = 0;
+        // System.out.println("animais totais: " +
+        // elevador.checarAnimaisNoElevador().length);
+        // System.out.println("Peso total após desembarque: " + pesoTotal);
+        // System.out.println("AAndar atual:" + andarAtual);
+        // System.out.println("Animal desembarcado no andar desejado. Andar:" +
+        // andarDesejado);
+
+        // Verificar se há outros animais na fila para embarcar
+        // while (andar.consultarTamanhoDaFila() > 0) {
+        // Animal proximoAnimal = andar.chamarProximoDaFila();
+        // if (podemEmbarcarJuntos(animal, proximoAnimal, elevador)) {
+        // // Verificar o peso limite antes de embarcar o próximo animal
+        // int novoPesoTotal = pesoTotal + proximoAnimal.getPeso();
+        // if (novoPesoTotal <= elevador.LIMITE_DE_PESO) {
+        // // Embarcar o próximo animal
+        // elevador.embarcar(proximoAnimal);
+        // pesoTotal = novoPesoTotal;
+        // System.out.println("Animal embarcado no elevador");
+        // System.out.println("Peso total após embarque: " + pesoTotal);
+        // } else {
+        // System.out.println("Peso limite do elevador excedido. Não é possível embarcar
+        // o próximo animal.");
+        // }
+        // } else {
+        // System.out.println("Animais não podem embarcar juntos. Eles têm
+        // características diferentes.");
+        // }
+        // }
+    }else{
+        andarEntrePrimeiroEQuartoAndar(elevador);
+        System.out.println("Nenhum animal na fila do andar.");
+        // subir se andar for menor que 4 se for 4 descer
+    }
+    }
+
+    // Método para animais que podem embarcar juntos
+    public boolean podemEmbarcarJuntos(Animal animal1, Animal animal2, Elevador elevador) {
+        // Verificar se os tipos dos animais são iguais
+        if (!animal1.getClass().getSimpleName().equals(animal2.getClass().getSimpleName())) {
+            return false;
+        }
+
+        // Verificar a diferença de temperatura ideal entre os animais
+        int diferencaTemperatura = Math.abs(animal1.getTemperaturaIdeal() - animal2.getTemperaturaIdeal());
+        if (diferencaTemperatura > 15) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Move o elevador para o térreo (andar 0).
+     */
+    public void irParaTerreo(Elevador elevador) {
+        while (elevador.getAndar() > 0) {
+            System.out.println("ta aqui");
+            elevador.descer();
+            elevador.movimentar();
+        }
+    }
+
+    public void andarEntrePrimeiroEQuartoAndar(Elevador elevador) {
+        int andarAtual = elevador.getAndar();
+
+        
+                if (andarAtual < 4) {
+                    elevador.subir();
+                } else {
+                    elevador.descer();
+                }
+            
+                if (andarAtual > 0) {
+                    elevador.descer();
+                } else {
+                    elevador.subir();
+                }
+        
+            elevador.movimentar();
+            andarAtual = elevador.getAndar();
+        
+    }
+
+   public boolean temperaturaIdeal(int temperaturaAnimal, int temperaturaElevador) {
+    if (temperaturaAnimal == temperaturaElevador) {
+        return true;
+    }
+    return false;
+}
 }

@@ -36,7 +36,7 @@ public class Reptil extends Animal {
      * @return String "Andando"
      */
     public String andar() {
-        return "Andando";
+        return "andando";
     }
 
     @Override

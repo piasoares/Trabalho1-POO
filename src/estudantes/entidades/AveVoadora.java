@@ -31,7 +31,7 @@ public class AveVoadora extends Ave{
      * @return a String "Voando".
      */
     public String voar(){
-        return "Voando";
+        return "voando";
     }
 
     @Override

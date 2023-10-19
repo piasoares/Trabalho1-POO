@@ -33,7 +33,7 @@ public class MamiferoTerrestre extends Mamifero{
      * @return String "Andando"
      */
     public String andar(){
-        return "Andando";
+        return "andando";
     }
     @Override
     public String toString() {

@@ -42,7 +42,7 @@ public class Anfibio extends Animal {
      * @return a String "Andando".
      */
     public String andar(){
-        return "Andando";
+        return "andando";
     }
 
     /**
@@ -50,7 +50,7 @@ public class Anfibio extends Animal {
      * @return a String "Nadando".
      */
     public String nadar(){
-        return "Nadando";
+        return "nadando";
     }
 
     @Override

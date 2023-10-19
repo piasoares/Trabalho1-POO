@@ -36,7 +36,7 @@ public class MamiferoAquatico  extends Mamifero{
      * @return a String "Nadando".
      */
     public String nadar(){
-        return "Nadando";
+        return "nadando";
     }
 
     @Override

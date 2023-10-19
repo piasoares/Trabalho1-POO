@@ -34,7 +34,7 @@ public class Peixe extends Animal {
      * @return a String "Nadando".
      */
     public String nadar(){
-        return "Nadando";
+        return "nadando";
     }
     /**
      * retorna o tempo de paciencia maxima do peixe para esperar na fila, antes de desistir

@@ -56,7 +56,7 @@ public class Ave extends Animal {
      * @return a String "Andando".
      */
     public String andar(){
-        return "Andando";
+        return "andando";
     }
 
 
